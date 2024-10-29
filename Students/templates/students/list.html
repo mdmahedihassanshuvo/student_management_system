@@ -1,0 +1,42 @@
+<!-- templates/students/list.html -->
+{% extends "base.html" %}
+
+{% block title %}Student List{% endblock %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h3>Student List</h3>
+    </div>
+    <div class="card-body">
+        {% if students %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Student ID</th>
+                    <th scope="col">Semester</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Grade</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for student in students %}
+                <tr>
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.student_id }}</td>
+                    <td>{{ student.semester }}</td>
+                    <td>{{ student.department }}</td>
+                    <td>{{ student.grade|default:"N/A" }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="text-muted">No students found.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

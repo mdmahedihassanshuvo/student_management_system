@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Student{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mb-4">Create New Student</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_name" class="form-label">Name</label>
+            {{ form.name }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_student_id" class="form-label">Student ID</label>
+            {{ form.student_id }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_semester" class="form-label">Semester</label>
+            {{ form.semester }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_department" class="form-label">Department</label>
+            {{ form.department }}
+        </div>
+
+        <div class="mb-3">
+            <label for="id_grade" class="form-label">Grade</label>
+            {{ form.grade }}
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add Student</button>
+        <a href="{% url 'student_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+
+{% endblock %}
