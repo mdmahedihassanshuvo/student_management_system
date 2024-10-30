@@ -4,9 +4,13 @@ from django.views.generic import (
     CreateView,
     DetailView,
     UpdateView,
-    DeleteView
+    View
 )
-from django.shortcuts import get_object_or_404
+from django.shortcuts import (
+    get_object_or_404,
+    redirect,
+    render
+)
 from django.urls import reverse_lazy
 from .models import Student
 from .forms import StudentForm
@@ -56,10 +60,15 @@ class StudentUpdateView(UpdateView):
         return super().form_valid(form)
 
 
-class StudentDeleteView(DeleteView):
-    model = Student
-    success_url = reverse_lazy('student_list')
+class StudentDeleteView(View):
+    def get(self, request, student_id):
+        student = get_object_or_404(Student, student_id=student_id)
+        return render(
+            request, 'students/student_delete.html',
+            {'student': student}
+        )
 
-    def delete(self):
-        student_id = self.kwargs.get("student_id")
-        return get_object_or_404(Student, student_id=student_id)
+    def post(self, request, student_id):
+        student = get_object_or_404(Student, student_id=student_id)
+        student.delete()
+        return redirect('student_list')
