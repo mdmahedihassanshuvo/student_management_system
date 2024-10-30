@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Student Details{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Student Details</h1>
+
+    <div class="card mt-4">
+        <div class="card-header">
+            <h5>{{ student.name }}</h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Student ID:</strong> {{ student.student_id }}</p>
+            <p><strong>Semester:</strong> {{ student.semester }}</p>
+            <p><strong>Department:</strong> {{ student.department }}</p>
+            <p><strong>Grade:</strong> {{ student.grade|default:"N/A" }}</p>
+            <!-- Using default filter for None value -->
+        </div>
+        <div class="card-footer text-end">
+            <a href="{% url 'student_list' %}" class="btn btn-primary">Back to Student List</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

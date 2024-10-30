@@ -9,6 +9,9 @@
         <h3>Student List</h3>
     </div>
     <div class="card-body">
+        <div class="mb-3">
+            <a href="{% url 'create_student' %}" class="btn btn-success">Create Student</a>
+        </div>
         {% if students %}
         <table class="table table-striped">
             <thead>
@@ -19,6 +22,7 @@
                     <th scope="col">Semester</th>
                     <th scope="col">Department</th>
                     <th scope="col">Grade</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,6 +34,12 @@
                     <td>{{ student.semester }}</td>
                     <td>{{ student.department }}</td>
                     <td>{{ student.grade|default:"N/A" }}</td>
+                    <td>
+                        <a href="{% url 'student_details' student_id=student.student_id %}"
+                            class="btn btn-info btn-sm">Details</a>
+                        <a href="{% url 'update_student' student_id=student.student_id %}"
+                            class="btn btn-warning btn-sm">Update</a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>
